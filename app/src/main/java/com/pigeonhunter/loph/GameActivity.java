@@ -12,4 +12,10 @@ public class GameActivity extends Activity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_game);
     }
+
+    @Override
+    public void onBackPressed() {
+        // 拦截返回键
+        // TODO: 添加暂停功能
+    }
 }
