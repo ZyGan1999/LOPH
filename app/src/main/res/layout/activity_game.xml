@@ -5,24 +5,191 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.pigeonhunter.loph.view.GameView
-        android:id="@+id/gameView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="138dp" />
 
-    <TextView
+    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/GridLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="动态添加组件示例"
-        android:id="@+id/textview"/>
+        android:columnCount="14"
+        android:orientation="horizontal"
+        android:rowCount="6"
+        android:fitsSystemWindows="true">
 
-    <LinearLayout
-        android:id="@+id/btLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textview"
-        android:orientation="vertical"></LinearLayout>
+        <Button
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:text=" "
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
 
+        <Button
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:text=" "
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button android:text=" "
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button android:text=" "
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button android:text=" "
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button android:text=" "
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button android:text=" "
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button android:text=" "
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button android:text=" "
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button android:text=" "
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button android:text=" "
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button android:text=" "
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button android:text=" "
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button android:text=" "
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button android:text=" "
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button
+            android:text=" "
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button android:text=" "
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button android:text=" "
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+        <Button
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:text=" "
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:text=" "
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+        <Button
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:text=" "
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+        <Button
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:text=" "
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+        <Button
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:text=" "
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+        <Button
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:text=" "
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+        <Button
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:text=" "
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+        <Button
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:text=" "
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+        <Button
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:text=" "
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+        <Button
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:text=" "
+            android:layout_height="102dp"
+            android:layout_width="104dp"/>
+
+
+
+    </GridLayout>
 </android.support.constraint.ConstraintLayout>

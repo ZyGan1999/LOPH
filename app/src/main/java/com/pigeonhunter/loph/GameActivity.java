@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Layout;
+import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
@@ -19,7 +21,6 @@ public class GameActivity extends Activity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_game);
 
-        LinearLayout GameLayout =  findViewById(R.id.btLayout);
 
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics dm = new DisplayMetrics();
@@ -31,24 +32,13 @@ public class GameActivity extends Activity {
         // 屏幕宽度算法:屏幕宽度（像素）/屏幕密度
         int screenWidth = (int) (width / density);  // 屏幕宽度(dp)
         int screenHeight = (int) (height / density);// 屏幕高度(dp)
-
-        /*ImageButton ibt = new ImageButton(this );
+        /*
+        ImageButton ibt = new ImageButton(this );
         ibt.setScaleX(0.5f);
         ibt.setScaleY(0.5f);
         ibt.setImageDrawable(getResources().getDrawable(R.drawable.bbutton));
-        GameLayout.addView(ibt);*/
-
-        for(int i = 0; i < 7;++i){
-            for(int j = 0;j < 7;++j){
-                ImageButton ibt = new ImageButton(this );
-                ibt.setImageDrawable(getResources().getDrawable(R.drawable.bbutton));
-                ibt.setX(screenWidth * i / 7);
-                ibt.setY(screenHeight * j / 7);
-                ibt.setVisibility(View.VISIBLE);
-
-                GameLayout.addView(ibt);
-            }
-        }
+        GameLayout.addView(ibt);
+        */
 
 
 
