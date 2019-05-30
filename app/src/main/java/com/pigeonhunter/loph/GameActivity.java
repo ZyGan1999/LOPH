@@ -11,6 +11,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -39,7 +41,16 @@ public class GameActivity extends Activity {
         ibt.setImageDrawable(getResources().getDrawable(R.drawable.bbutton));
         GameLayout.addView(ibt);
         */
-
+        GridLayout gl = findViewById(R.id.GridLayout1);
+        for(int i = 0;i < 28;++i){
+            Button bt = new Button(this);
+            bt.setId(i);
+            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+            params.width = width/gl.getColumnCount();
+            params.height = height/gl.getRowCount();
+            params.setMargins(2,2,2,2);
+            gl.addView(bt,params);
+        }
 
 
 
