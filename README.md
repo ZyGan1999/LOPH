@@ -15,4 +15,19 @@
 ## 当前的一些约定
 - 谱面txt文件的编写可参考resources/raw/test.txt
 - note采用Button控件实现，仅在Button上做UI优化
+- GameActivity的主体只有一个GridLayout
 - 游戏界面一共24个Button，4x6，每个Button都存入了二维数组，可以通过索引号直接获得其实例（还在优化）
+## 正在进行的工作
+### branch BtBeautyfy
+- 加界面
+- 给MainActivity做美化
+- 给buttons作样式设计
+- 学习Android动画的实现方式，应用到GameActivity
+### branch ScoreCounter
+- 正在重新排列 4x6 button（其实本来应该再开个分支，但是属于之前已经被删掉的分支的失误，在这里弥补）
+- TimeCountDown的编写
+- 实现判定函数，在此之前需要考虑如何把txt文件中的参数合理的存进项目中
+## 后续方向
+- 找歌，编谱面
+- OnTouchEvent的细节优化
+- 封装功能（没时间就算了）
