@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.Layout;
-import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -14,13 +12,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 public class GameActivity extends Activity {
     private int score = 0;
     private TextView scoretv;
+    private static final String TAG = "GameActivity";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,11 +67,12 @@ public class GameActivity extends Activity {
                     scoretv.setText(""+score);
                 }
             });
-            bts[i/gl.getRowCount()][i%gl.getColumnCount()] = bt;
+            //Log.i(TAG, ""+i/gl.getColumnCount()+i%gl.getColumnCount());
+            bts[i/gl.getColumnCount()][i%gl.getColumnCount()] = bt;
             gl.addView(bt,params);
         }
 
-
+    debugReadFile();
 
     }
 
@@ -78,6 +82,39 @@ public class GameActivity extends Activity {
         // TODO: 添加暂停功能
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
+    }
+
+    public void debugReadFile(){
+        InputStream inputStream = getResources().openRawResource(R.raw.test);
+
+        String str = getString(inputStream);
+        Log.e(TAG, "onCreate: ----str------" + str);
+
+        String[] arr = str.split("\\s+");
+        for (String ss : arr) {
+            Log.e(TAG, "onCreate: -------ss------" + ss);
+        }
+    }
+
+    public static String getString(InputStream inputStream) {
+        InputStreamReader inputStreamReader = null;
+        try {
+            inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+        } catch (UnsupportedEncodingException e1) {
+            e1.printStackTrace();
+        }
+        BufferedReader reader = new BufferedReader(inputStreamReader);
+        StringBuffer sb = new StringBuffer("");
+        String line;
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+                sb.append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
     }
 
 
