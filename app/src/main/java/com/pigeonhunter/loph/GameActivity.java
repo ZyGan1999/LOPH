@@ -42,22 +42,17 @@ public class GameActivity extends Activity {
         int screenWidth = (int) (width / density);  // 屏幕宽度(dp)
         int screenHeight = (int) (height / density);// 屏幕高度(dp)
 
-        GridLayout gl = findViewById(R.id.GridLayout1); // rowcount = 4 , columncount = 7
-        scoretv = new TextView(this);
-        scoretv.setText(""+score);
-        GridLayout.LayoutParams tvparams = new GridLayout.LayoutParams();
-        tvparams.rowSpec = GridLayout.spec(0,4);
-        tvparams.setGravity(Gravity.CENTER);
-        gl.addView(scoretv,tvparams);
+        GridLayout gl = findViewById(R.id.GridLayout1); // rowcount = 4 , columncount = 6
+
 
         Button bts[][] = new Button[gl.getRowCount()][gl.getColumnCount()];
 
 
-        for(int i = 0;i < 28;++i){
+        for(int i = 0;i < 24;++i){
             Button bt = new Button(this);
             bt.setId(i);
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-            params.width = width/gl.getColumnCount();
+            params.width = width/(gl.getColumnCount()+1);
             params.height = height/gl.getRowCount();
             params.setMargins(2,2,2,2);
             bt.setOnClickListener(new View.OnClickListener() {
@@ -68,11 +63,18 @@ public class GameActivity extends Activity {
                 }
             });
             //Log.i(TAG, ""+i/gl.getColumnCount()+i%gl.getColumnCount());
-            bts[i/gl.getColumnCount()][i%gl.getColumnCount()] = bt;
+            bts[i/(gl.getColumnCount())][i%(gl.getColumnCount())] = bt;
             gl.addView(bt,params);
         }
+        scoretv = new TextView(this);
+        scoretv.setText(""+score);
+        GridLayout.LayoutParams tvparams = new GridLayout.LayoutParams();
+        tvparams.rowSpec = GridLayout.spec(0,4);
+        tvparams.columnSpec = GridLayout.spec(0,2);
+        tvparams.setGravity(Gravity.CENTER);
+        gl.addView(scoretv,tvparams);
 
-    debugReadFile();
+        debugReadFile();
 
     }
 
