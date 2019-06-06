@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -30,7 +31,7 @@ public class GameActivity extends Activity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_game);
 
-
+        // 计算屏幕宽度和高度
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics dm = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(dm);
@@ -42,19 +43,29 @@ public class GameActivity extends Activity {
         int screenWidth = (int) (width / density);  // 屏幕宽度(dp)
         int screenHeight = (int) (height / density);// 屏幕高度(dp)
 
-        GridLayout gl = findViewById(R.id.GridLayout1); // rowcount = 4 , columncount = 6
+        // 传入GridLayout相关参数
+        GridLayout gl = findViewById(R.id.GridLayout1); // rowcount = 4 , columncount = 7
 
+        // 动态添加GridLayout中的控件-combo数，TextView
+        scoretv = new TextView(this);
+        scoretv.setText(""+score);
+        scoretv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 70);
+        GridLayout.LayoutParams tvparams = new GridLayout.LayoutParams();
+        tvparams.rowSpec = GridLayout.spec(0,1);
+        tvparams.columnSpec = GridLayout.spec(0,gl.getColumnCount());
+        tvparams.setGravity(Gravity.CENTER);
+        gl.addView(scoretv,tvparams);
 
-        Button bts[][] = new Button[gl.getRowCount()][gl.getColumnCount()];
+        Button bts[][] = new Button[gl.getRowCount()-1][gl.getColumnCount()];// one row for textview
 
-
-        for(int i = 0;i < 24;++i){
+        // Buttons
+        for(int i = 0;i < (gl.getRowCount()-1)*gl.getColumnCount();++i){
             Button bt = new Button(this);
             bt.setId(i);
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-            params.width = width/(gl.getColumnCount()+1);
-            params.height = height/gl.getRowCount();
-            params.setMargins(2,2,2,2);
+            params.width = width/(gl.getColumnCount());
+            params.height = height/(gl.getRowCount());
+            params.setMargins(12,2,12,2);
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -62,17 +73,10 @@ public class GameActivity extends Activity {
                     scoretv.setText(""+score);
                 }
             });
-            //Log.i(TAG, ""+i/gl.getColumnCount()+i%gl.getColumnCount());
             bts[i/(gl.getColumnCount())][i%(gl.getColumnCount())] = bt;
             gl.addView(bt,params);
         }
-        scoretv = new TextView(this);
-        scoretv.setText(""+score);
-        GridLayout.LayoutParams tvparams = new GridLayout.LayoutParams();
-        tvparams.rowSpec = GridLayout.spec(0,4);
-        tvparams.columnSpec = GridLayout.spec(0,2);
-        tvparams.setGravity(Gravity.CENTER);
-        gl.addView(scoretv,tvparams);
+
 
         debugReadFile();
 
@@ -90,12 +94,16 @@ public class GameActivity extends Activity {
         InputStream inputStream = getResources().openRawResource(R.raw.test);
 
         String str = getString(inputStream);
-        Log.e(TAG, "onCreate: ----str------" + str);
-
-        String[] arr = str.split("\\s+");
-        for (String ss : arr) {
-            Log.e(TAG, "onCreate: -------ss------" + ss);
+        //Log.e(TAG, "onCreate: ----str------" + str);
+        String[] arr = str.split("\n");
+        for(int i = 0;i < arr.length;++i){
+            Log.e(TAG, "debugReadFile: curLine: "+arr[i] );
         }
+
+//        String[] arr = str.split("\\s+");
+//        for (String ss : arr) {
+//            Log.e(TAG, "onCreate: -------ss------" + ss);
+//        }
     }
 
     public static String getString(InputStream inputStream) {
