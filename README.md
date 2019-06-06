@@ -2,20 +2,20 @@
 ## 2019.6.6 by ZyGan1999
 ### 新的分支设计
 <b>之前由于功能设计不清楚造成了分支功能的杂糅，现在已经重新开启了5个分支，每个分支的任务如下</b>
-#### MusicList
+#### - [] MusicList
 - [涉及文件]MusicListActivity.java;activity_music_list.xml;GameActivity.java;MainActivity.java;
 - [任务]编写这个activity的layout，传递参数，建立MainActivity-MusicListActivity-GameActivity的连接，详情见注释
 - [注意事项]**GameActivity和MainActivity中只改intent切换界面部分，不要动其他的代码**
-#### Timer
+#### - [] Timer
 - [涉及文件]TimeCountDown.java
 - [任务]编写计时器的函数和方法
-#### CountScore
+#### - [] CountScore
 - [涉及文件]GameActivity.java
 - [任务]编写GameActivity的成员函数，用于记分；编写button们的事件监听器
-#### Styles
+#### - [] Styles
 - [涉及文件]所有需要样式设计的activity;Resources文件夹
 - [任务]编写设计的样式并应用到控件上
-#### ResultActivity
+#### - [] ResultActivity
 - [涉及文件]ResultActivity.java;GameActivity.java;
 - [任务]编写结算界面，从GameActivity中传递分数参数，建立intent连接
 ### 注意事项【重要】
