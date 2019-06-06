@@ -77,8 +77,9 @@ public class GameActivity extends Activity {
             gl.addView(bt,params);
         }
 
-
-        debugReadFile();
+        //Intent intent = getIntent();
+        //int MusicSelection = intent.getIntExtra("MusicSelection",-1);
+        //ReadFile(MusicSelection);
 
     }
 
@@ -90,20 +91,14 @@ public class GameActivity extends Activity {
         startActivity(intent);
     }
 
-    public void debugReadFile(){
-        InputStream inputStream = getResources().openRawResource(R.raw.test);
+    public void ReadFile(int Rid){
+        InputStream inputStream = getResources().openRawResource(Rid);
 
         String str = getString(inputStream);
-        //Log.e(TAG, "onCreate: ----str------" + str);
         String[] arr = str.split("\n");
         for(int i = 0;i < arr.length;++i){
             Log.e(TAG, "debugReadFile: curLine: "+arr[i] );
         }
-
-//        String[] arr = str.split("\\s+");
-//        for (String ss : arr) {
-//            Log.e(TAG, "onCreate: -------ss------" + ss);
-//        }
     }
 
     public static String getString(InputStream inputStream) {

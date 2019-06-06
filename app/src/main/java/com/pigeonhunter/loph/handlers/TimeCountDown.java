@@ -21,7 +21,7 @@ class TimeCountDown extends CountDownTimer {
     @Override
     public void onFinish() {
         // TODO Auto-generated method stub
-
+4
     }
 
 }
