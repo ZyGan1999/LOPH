@@ -16,8 +16,8 @@
 - [ ] [涉及文件]所有需要样式设计的activity;Resources文件夹
 - [ ] [任务]编写设计的样式并应用到控件上
 #### ResultActivity
-- [ ] [涉及文件]ResultActivity.java;GameActivity.java;
-- [ ] [任务]编写结算界面，从GameActivity中传递分数参数，建立intent连接
+- [x] [涉及文件]ResultActivity.java;GameActivity.java;
+- [x] [任务]编写结算界面，从GameActivity中传递分数参数，建立intent连接
 ### 注意事项【重要】
 - 除了写明的[涉及文件]之外，不要越俎代庖，如果有必要更改其他的文件，请与大家讨nun（扎心摸仙语气）
 - 不要在GameActivity中加测试代码，至少不要提交上去，删干净，之后再一起测试功能
