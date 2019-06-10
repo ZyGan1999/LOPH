@@ -8,7 +8,6 @@ import android.widget.Button;
 import com.pigeonhunter.loph.GameActivity;
 import com.pigeonhunter.loph.R;
 import com.pigeonhunter.loph.view.MusicListActivity;
-import com.pigeonhunter.loph.view.ResultActivity;
 
 public class MainActivity extends AppCompatActivity {
 
