@@ -21,11 +21,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
+import com.pigeonhunter.loph.handlers.TimeCountDown;
+
 public class GameActivity extends Activity {
     private int score = 0;
     private TextView scoretv;
     private static final String TAG = "GameActivity";
     private Button bts[][];
+    private TimeCountDown tcd;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +80,8 @@ public class GameActivity extends Activity {
             bts[i/(gl.getColumnCount())][i%(gl.getColumnCount())] = bt;
             gl.addView(bt,params);
         }
-
+        tcd = new TimeCountDown(10000, 1000, this);
+        tcd.start();
         //Intent intent = getIntent();
         //int MusicSelection = intent.getIntExtra("MusicSelection",-1);
         //ReadFile(MusicSelection);
@@ -104,6 +108,10 @@ public class GameActivity extends Activity {
 
     public Button[][] getButtons(){
         return bts;
+    }
+
+    public void onNotifyButton(int x, int y) {
+        bts[x][y].setVisibility(View.INVISIBLE);
     }
 
     public static String getString(InputStream inputStream) {
