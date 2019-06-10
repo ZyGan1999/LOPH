@@ -25,6 +25,7 @@ public class GameActivity extends Activity {
     private int score = 0;
     private TextView scoretv;
     private static final String TAG = "GameActivity";
+    private Button bts[][];
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +57,7 @@ public class GameActivity extends Activity {
         tvparams.setGravity(Gravity.CENTER);
         gl.addView(scoretv,tvparams);
 
-        Button bts[][] = new Button[gl.getRowCount()-1][gl.getColumnCount()];// one row for textview
+        bts = new Button[gl.getRowCount()-1][gl.getColumnCount()];// one row for textview
 
         // Buttons
         for(int i = 0;i < (gl.getRowCount()-1)*gl.getColumnCount();++i){
@@ -99,6 +100,10 @@ public class GameActivity extends Activity {
         for(int i = 0;i < arr.length;++i){
             Log.e(TAG, "debugReadFile: curLine: "+arr[i] );
         }
+    }
+
+    public Button[][] getButtons(){
+        return bts;
     }
 
     public static String getString(InputStream inputStream) {
