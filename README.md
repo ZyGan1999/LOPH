@@ -7,8 +7,8 @@
 - [ ] [任务]编写这个activity的layout，传递参数，建立MainActivity-MusicListActivity-GameActivity的连接，详情见注释
 - [ ] [注意事项]**GameActivity和MainActivity中只改intent切换界面部分，不要动其他的代码**
 #### Timer
-- [ ] [涉及文件]TimeCountDown.java
-- [ ] [任务]编写计时器的函数和方法
+- [x] [涉及文件]TimeCountDown.java
+- [x] [任务]编写计时器的函数和方法
 #### CountScore
 - [ ] [涉及文件]GameActivity.java
 - [ ] [任务]编写GameActivity的成员函数，用于记分；编写button们的事件监听器
