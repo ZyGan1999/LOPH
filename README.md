@@ -7,9 +7,9 @@
 ### 新的分支设计
 <b>之前由于功能设计不清楚造成了分支功能的杂糅，现在已经重新开启了5个分支，每个分支的任务如下</b>
 #### MusicList
-- [ ] [涉及文件]MusicListActivity.java;activity_music_list.xml;GameActivity.java;MainActivity.java;
-- [ ] [任务]编写这个activity的layout，传递参数，建立MainActivity-MusicListActivity-GameActivity的连接，详情见注释
-- [ ] [注意事项]**GameActivity和MainActivity中只改intent切换界面部分，不要动其他的代码**
+- [x] [涉及文件]MusicListActivity.java;activity_music_list.xml;GameActivity.java;MainActivity.java;
+- [x] [任务]编写这个activity的layout，传递参数，建立MainActivity-MusicListActivity-GameActivity的连接，详情见注释
+- [x] [注意事项]**GameActivity和MainActivity中只改intent切换界面部分，不要动其他的代码**
 #### Timer
 - [x] [涉及文件]TimeCountDown.java;GameActivity.java;KeyPress.java
 - [x] [任务]编写计时器的函数和方法
