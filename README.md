@@ -7,7 +7,7 @@
 - [ ] [任务]编写这个activity的layout，传递参数，建立MainActivity-MusicListActivity-GameActivity的连接，详情见注释
 - [ ] [注意事项]**GameActivity和MainActivity中只改intent切换界面部分，不要动其他的代码**
 #### Timer
-- [x] [涉及文件]TimeCountDown.java
+- [x] [涉及文件]TimeCountDown.java;GameActivity.java;KeyPress.java
 - [x] [任务]编写计时器的函数和方法
 #### CountScore
 - [ ] [涉及文件]GameActivity.java
@@ -34,9 +34,9 @@
   - [ ] 设置界面：控制音量等
 - [ ] 提示性的动画
 #### 计时器、谱面与判定
-- [ ] 拆分谱面文件字符串，存入相应变量
-- [ ] 计时器的编写与调用
-- [ ] 判定函数的实现
+- [x] 拆分谱面文件字符串，存入相应变量
+- [x] 计时器的编写与调用
+- [x] 判定函数的实现
 ### 当前的一些约定
 - 谱面txt文件的编写可参考resources/raw/test.txt
 - note采用Button控件实现，仅在Button上做UI优化
@@ -50,8 +50,8 @@
 - [ ] 学习Android动画的实现方式，应用到GameActivity
 #### branch ScoreCounter
 - [x] 正在重新排列 3x7 button（其实本来应该再开个分支，但是属于之前已经被删掉的分支的失误，在这里弥补）
-- [ ] TimeCountDown的编写
-- [ ] 实现判定函数，在此之前需要考虑如何把txt文件中的参数合理的存进项目中
+- [x] TimeCountDown的编写
+- [x] 实现判定函数，在此之前需要考虑如何把txt文件中的参数合理的存进项目中
 ### 后续方向
 - 找歌，编谱面
 - OnTouchEvent的细节优化
