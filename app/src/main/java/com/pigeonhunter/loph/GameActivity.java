@@ -1,5 +1,6 @@
 package com.pigeonhunter.loph;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -55,7 +56,7 @@ public class GameActivity extends Activity {
         setContentView(R.layout.activity_game);
 
         // 获取从MusicListActivity传入的参数信息
-        getMusicListParams();
+        // getMusicListParams();
 
 
         // 初始化播放器
@@ -96,6 +97,7 @@ public class GameActivity extends Activity {
         for(int i = 0;i < (gl.getRowCount()-1)*gl.getColumnCount();++i){
             Button bt = new Button(this);
             bt.setId(i);
+            bt.setBackgroundColor(getResources().getColor(R.color.aqua));
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = width/(gl.getColumnCount());
             params.height = height/(gl.getRowCount());
@@ -109,7 +111,10 @@ public class GameActivity extends Activity {
                 public void onClick(View v) {
                     // TODO 将被点击的按键的坐标和时间存储到容器中
                     KeyPress kp = new KeyPress(rowid,colid,currentTimeLeft);
+                    kp.log();
                     thePressedKeys.add(kp);
+                    //Log.e(TAG, "onClick: -------------------" );
+                    //printThePressedKeys();
                 }
             });
             bts[rowid][colid] = bt;
@@ -117,11 +122,13 @@ public class GameActivity extends Activity {
             gl.addView(bt,params);
         }
 
-        ReadFile(txtID);
+        //ReadFile(txtID);
+        ReadFile(R.raw.txt_littlestar);
 
         tcd = new TimeCountDown(totalMusicTime, 10, this);
 
-        playMusic(mp3ID);
+        //playMusic(mp3ID);
+        playMusic(R.raw.music_littlestar);
         tcd.start();
 
 
@@ -145,6 +152,7 @@ public class GameActivity extends Activity {
             //Log.e(TAG, "debugReadFile: curLine: "+arr[i] );
             if(i == 0){
                 totalMusicTime = Integer.parseInt(arr[i]);
+                currentTimeLeft = totalMusicTime;
                 Log.e(TAG,"firstline: "+totalMusicTime);
             }
             else {
@@ -181,7 +189,10 @@ public class GameActivity extends Activity {
     }
 
     public void onNotifyButton(int x, int y) {
-        bts[x][y].setVisibility(View.INVISIBLE);
+        Log.e(TAG, "onNotifyButton: "+ x + " " +y );
+        ObjectAnimator oba = ObjectAnimator.ofInt(bts[x][y],"backgroundColor",getResources().getColor(R.color.aqua),getResources().getColor(R.color.firebrick),getResources().getColor(R.color.aqua));
+        oba.setDuration(500);
+        oba.start();
     }
 
     public static String getString(InputStream inputStream) {
@@ -249,9 +260,16 @@ public class GameActivity extends Activity {
     }
 
     public void EndPlay(){
+        mp.stop();
         Intent resultIntent = new Intent(GameActivity.this, ResultActivity.class);
         resultIntent.putExtra("highestCombo",highestCombo);
         startActivity(resultIntent);
+    }
+
+    public void printThePressedKeys(){
+        for(KeyPress kp:thePressedKeys){
+            kp.log();
+        }
     }
 
 }
