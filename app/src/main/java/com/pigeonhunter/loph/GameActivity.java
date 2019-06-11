@@ -117,12 +117,12 @@ public class GameActivity extends Activity {
             gl.addView(bt,params);
         }
 
-        ReadFile(R.raw.test);
+        ReadFile(txtID);
 
         tcd = new TimeCountDown(totalMusicTime, 10, this);
+
+        playMusic(mp3ID);
         tcd.start();
-        //Intent intent = getIntent();
-        //int MusicSelection = intent.getIntExtra("MusicSelection",-1);
 
 
     }
