@@ -21,12 +21,16 @@ public class MusicListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_list);// TODO: Code in layout for ListView
 
-        // TODO: 寻找用户点击的歌曲对应谱面的文件资源的id
-        int id = 0;
+        // TODO: 寻找用户点击的歌曲对应谱面的文件资源的id和音乐文件的id
+        int txtid = 0;
+        int mp3id = 0;
 
         // TODO: 将生成的参数存入传递给GameActivity，并启动GameActivity
         Intent intent = new Intent(MusicListActivity.this, GameActivity.class);
-        intent.putExtra("MusicSelection",id);
+        Bundle bundle = new Bundle();
+        bundle.putInt("TxtId",txtid);
+        bundle.putInt("Mp3Id",mp3id);
+        intent.putExtra("MusicSelection",bundle);
         startActivity(intent);
 
     }

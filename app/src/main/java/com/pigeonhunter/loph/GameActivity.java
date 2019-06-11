@@ -3,6 +3,8 @@ package com.pigeonhunter.loph;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
@@ -20,16 +22,48 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+import com.pigeonhunter.loph.handlers.KeyPress;
+import com.pigeonhunter.loph.handlers.TimeCountDown;
+import com.pigeonhunter.loph.view.ResultActivity;
 
 public class GameActivity extends Activity {
     private int score = 0;
     private TextView scoretv;
     private static final String TAG = "GameActivity";
+    private Button bts[][];
+    private TimeCountDown tcd;
+    private Queue<KeyPress> keyPressQueue;
+    private long totalMusicTime; // 毫秒
+    private long currentTimeLeft;// 毫秒
+    private List<KeyPress> thePressedKeys;
+    private MediaPlayer mp;
+    private int highestCombo;
+
+    private int txtID;
+    private int mp3ID;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_game);
+
+        // 获取从MusicListActivity传入的参数信息
+        getMusicListParams();
+
+
+        // 初始化播放器
+        mp = new MediaPlayer();
+
+        // 初始化队列
+        keyPressQueue = new LinkedList<KeyPress>();
+        thePressedKeys = new LinkedList<KeyPress>();
 
         // 计算屏幕宽度和高度
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
@@ -56,7 +90,7 @@ public class GameActivity extends Activity {
         tvparams.setGravity(Gravity.CENTER);
         gl.addView(scoretv,tvparams);
 
-        Button bts[][] = new Button[gl.getRowCount()-1][gl.getColumnCount()];// one row for textview
+        bts = new Button[gl.getRowCount()-1][gl.getColumnCount()];// one row for textview
 
         // Buttons
         for(int i = 0;i < (gl.getRowCount()-1)*gl.getColumnCount();++i){
@@ -66,20 +100,30 @@ public class GameActivity extends Activity {
             params.width = width/(gl.getColumnCount());
             params.height = height/(gl.getRowCount());
             params.setMargins(12,2,12,2);
+
+            final int rowid = i/(gl.getColumnCount());
+            final int colid = i%(gl.getColumnCount());
+
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    score++;
-                    scoretv.setText(""+score);
+                    // TODO 将被点击的按键的坐标和时间存储到容器中
+                    KeyPress kp = new KeyPress(rowid,colid,currentTimeLeft);
+                    thePressedKeys.add(kp);
                 }
             });
-            bts[i/(gl.getColumnCount())][i%(gl.getColumnCount())] = bt;
+            bts[rowid][colid] = bt;
+            //button2kp.put(bt,new KeyPress(i/(gl.getColumnCount()),i%(gl.getColumnCount())));
             gl.addView(bt,params);
         }
 
-        //Intent intent = getIntent();
-        //int MusicSelection = intent.getIntExtra("MusicSelection",-1);
-        //ReadFile(MusicSelection);
+        ReadFile(txtID);
+
+        tcd = new TimeCountDown(totalMusicTime, 10, this);
+
+        playMusic(mp3ID);
+        tcd.start();
+
 
     }
 
@@ -92,13 +136,52 @@ public class GameActivity extends Activity {
     }
 
     public void ReadFile(int Rid){
+        // 通过 Rid 读取对应谱面资源文件，并按照文件内容获取总时间并生成对应的 KeyPress 对象
         InputStream inputStream = getResources().openRawResource(Rid);
 
         String str = getString(inputStream);
         String[] arr = str.split("\n");
         for(int i = 0;i < arr.length;++i){
-            Log.e(TAG, "debugReadFile: curLine: "+arr[i] );
+            //Log.e(TAG, "debugReadFile: curLine: "+arr[i] );
+            if(i == 0){
+                totalMusicTime = Integer.parseInt(arr[i]);
+                Log.e(TAG,"firstline: "+totalMusicTime);
+            }
+            else {
+                String[] info = arr[i].split(" ");
+                int rowId = Integer.parseInt(info[1]);
+                int colId = Integer.parseInt(info[2]);
+                int pretime = Integer.parseInt(info[0]);
+                Log.e(TAG, "curline: "+rowId + colId + pretime);
+                KeyPress kp = new KeyPress(rowId, colId, pretime);
+                keyPressQueue.add(kp);
+            }
         }
+    }
+
+    public void playMusic(int Rid){
+        mp = MediaPlayer.create(this,Rid);
+        mp.start();
+    }
+
+    public void pauseMusic(){
+        mp.pause();
+    }
+
+    public void continueMusic(){
+        mp.start();
+    }
+
+    public Button[][] getButtons(){
+        return bts;
+    }
+
+    public Queue<KeyPress> getKPQueue() {
+        return keyPressQueue;
+    }
+
+    public void onNotifyButton(int x, int y) {
+        bts[x][y].setVisibility(View.INVISIBLE);
     }
 
     public static String getString(InputStream inputStream) {
@@ -122,5 +205,53 @@ public class GameActivity extends Activity {
         return sb.toString();
     }
 
+
+
+    public long getCurrentTimeLeft(){
+        return currentTimeLeft;
+    }
+
+    public void minusCurrentTimeLeft(long timesplit){
+        currentTimeLeft -= timesplit;
+    }
+
+    public List<KeyPress> getThePressedKeys(){
+        return thePressedKeys;
+    }
+
+    public void clearThePressesKeys(){
+        thePressedKeys.clear();
+    }
+
+    public void addCombo(){
+        score++;
+    }
+
+    public void clearCombo(){
+        score = 0;
+    }
+
+    public void Refresh(){
+        scoretv.setText(""+score);
+    }
+
+    public void setHighestCombo(){
+        if(score > highestCombo){
+            highestCombo = score;
+        }
+    }
+
+    public void getMusicListParams(){
+        Intent fromMusicListIntent = getIntent();
+        Bundle bundle = fromMusicListIntent.getExtras();
+        txtID = bundle.getInt("TxtId");
+        mp3ID = bundle.getInt("Mp3Id");
+    }
+
+    public void EndPlay(){
+        Intent resultIntent = new Intent(GameActivity.this, ResultActivity.class);
+        resultIntent.putExtra("highestCombo",highestCombo);
+        startActivity(resultIntent);
+    }
 
 }
