@@ -1,5 +1,6 @@
 package com.pigeonhunter.loph;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -180,8 +181,15 @@ public class GameActivity extends Activity {
         return keyPressQueue;
     }
 
-    public void onNotifyButton(int x, int y) {
+    /*public void onNotifyButton(int x, int y) {
         bts[x][y].setVisibility(View.INVISIBLE);
+    }
+    */
+    public void onNotifyButton(int x, int y) {
+        Log.e(TAG, "onNotifyButton: "+ x + " " +y );
+        ObjectAnimator oba = ObjectAnimator.ofInt(bts[x][y],"backgroundColor",getResources().getColor(R.color.aqua),getResources().getColor(R.color.firebrick),getResources().getColor(R.color.aqua));
+        oba.setDuration(500);
+        oba.start();
     }
 
     public static String getString(InputStream inputStream) {

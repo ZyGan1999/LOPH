@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".view.MusicListActivity">
 
+
+    <ListView
+        android:id="@+id/music_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="8dp"></ListView>
+
 </android.support.constraint.ConstraintLayout>
