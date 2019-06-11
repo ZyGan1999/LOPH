@@ -2,7 +2,7 @@
 ## 2019.6.11 by ZyGan1999
 ### 添加了新的分支
 - MusicPlayer 用于实现歌曲的播放
-- [ ] [任务]改写MusicListActivity传递参数的方式，并在GameActivity中启动音乐播放
+- [x] [任务]改写MusicListActivity传递参数的方式，并在GameActivity中启动音乐播放
 ## 2019.6.6 by ZyGan1999
 ### 新的分支设计
 <b>之前由于功能设计不清楚造成了分支功能的杂糅，现在已经重新开启了5个分支，每个分支的任务如下</b>
