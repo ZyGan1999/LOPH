@@ -25,7 +25,7 @@ public class TimeCountDown extends CountDownTimer {
     public TimeCountDown(long millisInFuture, long countDownInterval, GameActivity g) {
         super(millisInFuture, countDownInterval);
         // millisInFuture 总时间, countDownInterval 倒计时时间间隔 单位：毫秒
-        // TODO Auto-generated constructor stub
+
         keyPressQueue = new LinkedList<KeyPress>();
         activekeyPressList = new LinkedList<KeyPress>();
 
@@ -46,7 +46,6 @@ public class TimeCountDown extends CountDownTimer {
     @Override
     public void onTick(long millisUntilFinished) {
 
-        //gameActivity.onNotifyButton(0, 0);
         gameActivity.minusCurrentTimeLeft(TimeSplit);
         // TODO 判定 GameActivity 中 KeyPress 队列中需要被 notify 的 button 对象，并对其调用 onNotyfyButton 方法
         if(keyPressQueue.isEmpty()){
@@ -54,7 +53,6 @@ public class TimeCountDown extends CountDownTimer {
         }
         else {
             // step1 激活应当激活的按键
-
             while( keyPressQueue.peek()!=null && keyPressQueue.peek().getPressTime() > gameActivity.getCurrentTimeLeft() - 50){
                 // 在精确判定时间的前 50ms 激活对应的 button
                 KeyPress acKP = keyPressQueue.remove();
@@ -76,6 +74,7 @@ public class TimeCountDown extends CountDownTimer {
                 }
                 if (flag){
                     gameActivity.addCombo();
+                    gameActivity.setHighestCombo();
                 }
                 else {
                     gameActivity.clearCombo();
@@ -83,18 +82,6 @@ public class TimeCountDown extends CountDownTimer {
             }
 
             // step3 清算被激活但是没有被按下的按键
-            List<Integer> indexNeedtoRemove;
-            /*
-            for (KeyPress activeKey:activekeyPressList) {
-                if (activeKey.getPressTime() > gameActivity.getCurrentTimeLeft() + 50){
-                    // 在精确判定时间的后 50ms 清除对应的 kp 对象
-                    indexNeedtoRemove.add()
-                    activekeyPressList.remove(activeKey);
-                    // 清空combo
-                    gameActivity.clearCombo();
-                }
-            }
-            */
             Iterator<KeyPress> iterator = activekeyPressList.iterator();
             while (iterator.hasNext()) {
                 KeyPress kp = iterator.next();
@@ -108,8 +95,7 @@ public class TimeCountDown extends CountDownTimer {
 
     @Override
     public void onFinish() {
-        // TODO Auto-generated method stub
-
+        gameActivity.EndPlay();
     }
 
 }

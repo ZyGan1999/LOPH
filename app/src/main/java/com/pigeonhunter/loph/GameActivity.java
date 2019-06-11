@@ -3,6 +3,8 @@ package com.pigeonhunter.loph;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
@@ -28,6 +30,7 @@ import java.util.Queue;
 
 import com.pigeonhunter.loph.handlers.KeyPress;
 import com.pigeonhunter.loph.handlers.TimeCountDown;
+import com.pigeonhunter.loph.view.ResultActivity;
 
 public class GameActivity extends Activity {
     private int score = 0;
@@ -39,6 +42,11 @@ public class GameActivity extends Activity {
     private long totalMusicTime; // 毫秒
     private long currentTimeLeft;// 毫秒
     private List<KeyPress> thePressedKeys;
+    private MediaPlayer mp;
+    private int highestCombo;
+
+    private int txtID;
+    private int mp3ID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +54,12 @@ public class GameActivity extends Activity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_game);
 
+        // 获取从MusicListActivity传入的参数信息
+        getMusicListParams();
+
+
+        // 初始化播放器
+        mp = new MediaPlayer();
 
         // 初始化队列
         keyPressQueue = new LinkedList<KeyPress>();
@@ -103,12 +117,12 @@ public class GameActivity extends Activity {
             gl.addView(bt,params);
         }
 
-        ReadFile(R.raw.test);
+        ReadFile(txtID);
 
         tcd = new TimeCountDown(totalMusicTime, 10, this);
+
+        playMusic(mp3ID);
         tcd.start();
-        //Intent intent = getIntent();
-        //int MusicSelection = intent.getIntExtra("MusicSelection",-1);
 
 
     }
@@ -145,6 +159,19 @@ public class GameActivity extends Activity {
         }
     }
 
+    public void playMusic(int Rid){
+        mp = MediaPlayer.create(this,Rid);
+        mp.start();
+    }
+
+    public void pauseMusic(){
+        mp.pause();
+    }
+
+    public void continueMusic(){
+        mp.start();
+    }
+
     public Button[][] getButtons(){
         return bts;
     }
@@ -178,6 +205,8 @@ public class GameActivity extends Activity {
         return sb.toString();
     }
 
+
+
     public long getCurrentTimeLeft(){
         return currentTimeLeft;
     }
@@ -204,6 +233,25 @@ public class GameActivity extends Activity {
 
     public void Refresh(){
         scoretv.setText(""+score);
+    }
+
+    public void setHighestCombo(){
+        if(score > highestCombo){
+            highestCombo = score;
+        }
+    }
+
+    public void getMusicListParams(){
+        Intent fromMusicListIntent = getIntent();
+        Bundle bundle = fromMusicListIntent.getExtras();
+        txtID = bundle.getInt("TxtId");
+        mp3ID = bundle.getInt("Mp3Id");
+    }
+
+    public void EndPlay(){
+        Intent resultIntent = new Intent(GameActivity.this, ResultActivity.class);
+        resultIntent.putExtra("highestCombo",highestCombo);
+        startActivity(resultIntent);
     }
 
 }
