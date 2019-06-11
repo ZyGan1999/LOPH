@@ -10,8 +10,8 @@
 - [x] [涉及文件]TimeCountDown.java;GameActivity.java;KeyPress.java
 - [x] [任务]编写计时器的函数和方法
 #### CountScore
-- [ ] [涉及文件]GameActivity.java
-- [ ] [任务]编写GameActivity的成员函数，用于记分；编写button们的事件监听器
+- [x] [涉及文件]GameActivity.java
+- [x] [任务]编写GameActivity的成员函数，用于记分；编写button们的事件监听器
 #### Styles
 - [ ] [涉及文件]所有需要样式设计的activity;Resources文件夹
 - [ ] [任务]编写设计的样式并应用到控件上
