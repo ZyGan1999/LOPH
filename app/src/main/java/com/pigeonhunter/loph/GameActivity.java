@@ -193,6 +193,12 @@ public class GameActivity extends Activity {
         ObjectAnimator oba = ObjectAnimator.ofInt(bts[x][y],"backgroundColor",getResources().getColor(R.color.aqua),getResources().getColor(R.color.firebrick),getResources().getColor(R.color.aqua));
         oba.setDuration(500);
         oba.start();
+        ObjectAnimator obaa = ObjectAnimator.ofFloat(bts[x][y],"rotation",0,360);
+        obaa.setDuration(500);
+        obaa.start();
+    }
+    public void onReadyButton(int x, int y){
+        bts[x][y].setBackgroundColor(getResources().getColor(R.color.burlywood));
     }
 
     public static String getString(InputStream inputStream) {

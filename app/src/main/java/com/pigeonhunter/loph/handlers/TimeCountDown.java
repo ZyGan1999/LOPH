@@ -53,6 +53,16 @@ public class TimeCountDown extends CountDownTimer {
             return;
         }
         else {
+            // step0 预备
+            Iterator<KeyPress> it = keyPressQueue.iterator();
+            while(it.hasNext()){
+                KeyPress kp = it.next();
+                if(kp.getPressTime() > gameActivity.getCurrentTimeLeft() - 1000){
+                    gameActivity.onReadyButton(kp.getRowId(),kp.getColId());
+                }
+                else break;
+            }
+
             // step1 激活应当激活的按键
             while( keyPressQueue.peek()!=null && keyPressQueue.peek().getPressTime() > gameActivity.getCurrentTimeLeft() - 250){
 
