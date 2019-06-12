@@ -41,7 +41,7 @@ public class KeyPress {
         if (kp._rowId != this._rowId || kp._colId != this._colId){
             return false;
         }
-        else return (Math.abs(kp._pressTime - this._pressTime) <= 20);
+        else return (Math.abs(kp._pressTime - this._pressTime) <= 100);
     }
 
     public void log(){
