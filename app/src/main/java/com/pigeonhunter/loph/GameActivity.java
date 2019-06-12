@@ -56,7 +56,7 @@ public class GameActivity extends Activity {
         setContentView(R.layout.activity_game);
 
         // 获取从MusicListActivity传入的参数信息
-        // getMusicListParams();
+        getMusicListParams();
 
 
         // 初始化播放器
@@ -122,13 +122,13 @@ public class GameActivity extends Activity {
             gl.addView(bt,params);
         }
 
-        //ReadFile(txtID);
-        ReadFile(R.raw.txt_chaos);
+        ReadFile(txtID);
+        //ReadFile(R.raw.txt_chaos);
 
         tcd = new TimeCountDown(totalMusicTime, 10, this);
 
-        //playMusic(mp3ID);
-        playMusic(R.raw.music_chaos);
+        playMusic(mp3ID);
+        //playMusic(R.raw.music_chaos);
         tcd.start();
 
 
@@ -268,7 +268,7 @@ public class GameActivity extends Activity {
 
     public void getMusicListParams(){
         Intent fromMusicListIntent = getIntent();
-        Bundle bundle = fromMusicListIntent.getExtras();
+        Bundle bundle = fromMusicListIntent.getBundleExtra("MusicSelection");
         txtID = bundle.getInt("TxtId");
         mp3ID = bundle.getInt("Mp3Id");
     }
