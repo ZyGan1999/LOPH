@@ -188,6 +188,7 @@ public class GameActivity extends Activity {
         return keyPressQueue;
     }
 
+
     public void onNotifyButton(int x, int y) {
         Log.e(TAG, "onNotifyButton: "+ x + " " +y );
         ObjectAnimator oba = ObjectAnimator.ofInt(bts[x][y],"backgroundColor",getResources().getColor(R.color.aqua),getResources().getColor(R.color.firebrick),getResources().getColor(R.color.aqua));
@@ -199,7 +200,12 @@ public class GameActivity extends Activity {
     }
     public void onReadyButton(int x, int y){
         bts[x][y].setBackgroundColor(getResources().getColor(R.color.burlywood));
+
+    /*public void onNotifyButton(int x, int y) {
+        bts[x][y].setVisibility(View.INVISIBLE);
+
     }
+    */
 
     public static String getString(InputStream inputStream) {
         InputStreamReader inputStreamReader = null;

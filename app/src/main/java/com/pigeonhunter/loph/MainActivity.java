@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newIntent = new Intent(MainActivity.this, GameActivity.class);
+                Intent newIntent = new Intent(MainActivity.this, MusicListActivity.class);
                 startActivity(newIntent);
             }
         });
