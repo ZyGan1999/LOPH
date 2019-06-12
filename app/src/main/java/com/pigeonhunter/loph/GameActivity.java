@@ -123,12 +123,12 @@ public class GameActivity extends Activity {
         }
 
         //ReadFile(txtID);
-        ReadFile(R.raw.txt_littlestar);
+        ReadFile(R.raw.txt_chaos);
 
         tcd = new TimeCountDown(totalMusicTime, 10, this);
 
         //playMusic(mp3ID);
-        playMusic(R.raw.music_littlestar);
+        playMusic(R.raw.music_chaos);
         tcd.start();
 
 
@@ -138,6 +138,7 @@ public class GameActivity extends Activity {
     public void onBackPressed() {
         // 拦截返回键
         // TODO: 添加暂停功能
+        mp.stop();
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
@@ -198,8 +199,9 @@ public class GameActivity extends Activity {
         obaa.setDuration(500);
         obaa.start();
     }
-    public void onReadyButton(int x, int y){
+    public void onReadyButton(int x, int y) {
         bts[x][y].setBackgroundColor(getResources().getColor(R.color.burlywood));
+    }
 
     /*public void onNotifyButton(int x, int y) {
         bts[x][y].setVisibility(View.INVISIBLE);

@@ -21,7 +21,7 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
         // TODO: 从Intent中获得分数参数score
         final Intent intent = getIntent();
-        int Score = intent.getIntExtra("Score",-1);
+        int Score = intent.getIntExtra("highestCombo",-1);
 
         // 将获取的分数转化为TextView
         scoretv = findViewById(R.id.score);
